@@ -6,7 +6,7 @@
   failed_when: false
 
 - name: create keys
-  command: ceph --cluster {{ cluster }} auth get-or-create {{ item.name }} {{ item.value }} -o /etc/ceph/{{ cluster }}.{{ item.name }}.keyring
+  command: ceph --cluster {{ cluster }} auth get-or-create {{ item.name }} {{ item.mon_cap }} {{ item.osd_cap }} -o /etc/ceph/{{ cluster }}.{{ item.name }}.keyring
   args:
     creates: /etc/ceph/{{ cluster }}.{{ item.name }}.keyring
   with_items: "{{ keys }}"
